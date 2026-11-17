@@ -2,8 +2,7 @@
 
 A React app that fetches users from an API and filters them by name.
 
-**Live demo:** https://your-link.vercel.app
-
+**Live demo:** https://users-directory-nine.vercel.app/
 ## Features
 
 - Fetches users from the DummyJSON API
