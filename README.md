@@ -12,7 +12,7 @@ A React app that fetches users from an API and filters them by name.
 
 ## Built with
 
-React (useState, useEffect), CSS Modules, Axios
+Axios,React (useState, useEffect), CSS Modules
 
 ## Run locally
 
