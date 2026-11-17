@@ -1,23 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import Cards from "./Cards/Cards";
+import SearchBar from "./SearchBar/SearchBar";
+import styles from "./App.module.css";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 function App() {
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  const [search, setSearch] = useState("");
+
+  useEffect(() => {
+    async function fetchUsers() {
+      try {
+        const response = await axios.get("https://dummyjson.com/users?limit=9");
+        setUsers(response.data.users);
+      } catch (err) {
+        setError("Could not load the users");
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchUsers();
+  }, []);
+
+  const visibleUsers = users.filter((user) =>
+    `${user.firstName} ${user.lastName}`
+      .toLowerCase()
+      .includes(search.toLowerCase()),
+  );
+  // The early returns
+  if (loading) return <h3>Loading....</h3>;
+  if (error) return <p>{error}</p>;
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={styles.container}>
+      <h1 className={styles.title}>Users Directory</h1>
+      <SearchBar search={search} setSearch={setSearch} />
+      <Cards users={visibleUsers} />
     </div>
   );
 }
