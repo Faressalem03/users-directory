@@ -10,6 +10,10 @@
     transition: 0.2s;
     padding: 24px 16px;
     background-color:#fff;
+    /* color: inherit; */
+}
+.link{
+    color: black;
 }
 .card h3 {
     font-size: 18px;
@@ -36,4 +40,7 @@
     object-fit: cover;
     border: 1px solid rgba(0, 0, 0, 0.158);
     border-radius: 50%;
+}
+a {
+    text-decoration: none;
 }
